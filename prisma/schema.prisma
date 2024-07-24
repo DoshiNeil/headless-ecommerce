@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id    String     @id @default(uuid())
+  name         String
+  description  String?
+  price        Float
+  stock        Int        @default(0)
+  category     Category?  @relation(fields: [categoryId], references: [id])
+  categoryId   String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  tags         ProductTag[]
+  attributes   ProductAttribute[]
+  images       Image[]
+}
+
+model Category {
+  id   String     @id @default(uuid())
+  name         String
+  parent       Category?  @relation("CategoryToCategory", fields: [parentId], references: [id])
+  parentId     String?
+  subCategories Category[] @relation("CategoryToCategory")
+  products     Product[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Tag {
+  id        String     @id @default(uuid())
+  name         String
+  products     ProductTag[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model ProductTag {
+  productId    String
+  tagId        String
+  product      Product    @relation(fields: [productId], references: [id])
+  tag          Tag        @relation(fields: [tagId], references: [id])
+  @@id([productId, tagId])
+}
+
+model Attribute {
+  id  String     @id @default(uuid())
+  name         String
+  products     ProductAttribute[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model ProductAttribute {
+  productId    String
+  attributeId  String
+  value        String
+  product      Product    @relation(fields: [productId], references: [id])
+  attribute    Attribute  @relation(fields: [attributeId], references: [id])
+  @@id([productId, attributeId])
+}
+
+model Image {
+  id      String     @id @default(uuid())
+  productId    String
+  url          String
+  product      Product    @relation(fields: [productId], references: [id])
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
