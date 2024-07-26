@@ -5,4 +5,3 @@ export class CreateProductDTO {
   stock?: number;
   categoryId?: string;
 }
-
