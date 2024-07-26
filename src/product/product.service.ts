@@ -11,6 +11,12 @@ export class ProductService {
   constructor(private prisma: PrismaService) { }
 
   async create(data: CreateProductDTO) {
+    const product = await this.prisma.product.findFirst({
+      where: { name: data.name.trim() },
+    });
+    if (!!product) {
+      return { error: `Product with name ${data.name} already exists` };
+    }
     return this.prisma.product.create({ data });
   }
   async findAll() {
