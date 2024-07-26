@@ -3,7 +3,8 @@
 [x] Setup postgresQL service. 
 [x] Update the docker-compose for development too, ref: https://www.tomray.dev/nestjs-docker-compose-postgres
 [x] Setup a product service
-[ ] Update Product create api to check for duplicate name 
+[x] Update Product create api to check for duplicate name 
+[x] Add error handling for all the incorrect requests
 [ ] Update Product create api to return category name if added 
 [ ] Create a Category CRUD 
 [ ] Add status field to Product. Can we use a Enum to set allowed values ( Active, Draft, Inactive, Archived)
