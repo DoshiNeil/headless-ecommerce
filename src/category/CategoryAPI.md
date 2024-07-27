@@ -40,6 +40,7 @@ In the document, we plan the API endpoints and define the appropriate responses
 ```
 {
     "name": "Abc",
+    "id": "<uuid>", // either name or id compulsory for identification
     "parent": "Xyz" // parent update is optional
 }
 ```
@@ -68,6 +69,8 @@ In the document, we plan the API endpoints and define the appropriate responses
 
 **none**
 
+- Name or id necessary for fetching
+
 #### Response
 
 ```
@@ -89,7 +92,9 @@ In the document, we plan the API endpoints and define the appropriate responses
 
 ```
 {
+// either name or id
     "name": "Abc",
+    "id": "<uuid>"
 }
 ```
 
@@ -115,6 +120,7 @@ In the document, we plan the API endpoints and define the appropriate responses
 ### Fetch a Category by id or name
 
 #### Request Body
+
 ```
 {
     "name": "Abc",
@@ -130,6 +136,7 @@ OR
 ```
 
 #### Response
+
 ```
 {
     "name":"Abc",
@@ -143,20 +150,17 @@ OR
 ### Delete a Category
 
 #### Request Body
-```
-{
-    "name": "Abc",
-}
-```
-
-OR
 
 ```
 {
     "id": "<uuid>",
+    "orphanProducts" : boolean // optional
+    "orphanSubCategories" : boolean // optional 
 }
 ```
+
 #### Response
+
 ```
 {
     "name":"Abc",
@@ -164,4 +168,8 @@ OR
     "message":deleted successfully"
 }
 ```
+- Check for any attached products 
+ - Error if appropriate flags are not passed
+- Check for any attached subcategories 
+ - Error if appropriate flags are not passed
 
