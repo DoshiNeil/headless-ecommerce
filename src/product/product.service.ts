@@ -19,7 +19,7 @@ export class ProductService {
       await this.prisma.category
         .findUnique({
           select: { id: true },
-          where: { name: data.category },
+          where: { name: categoryName },
         })
         .then((data) => (categoryId = data.id));
     }
@@ -45,7 +45,7 @@ export class ProductService {
       await this.prisma.category
         .findUnique({
           select: { id: true },
-          where: { name: data.category },
+          where: { name: categoryName },
         })
         .then((data) => (categoryId = data.id));
     }
