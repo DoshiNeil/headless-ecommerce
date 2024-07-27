@@ -8,10 +8,25 @@ type ProductId = Pick<Product, 'id'>;
 
 @Injectable()
 export class ProductService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async create(data: CreateProductDTO) {
-    return this.prisma.product.create({ data });
+    let categoryId: string = undefined;
+    let categoryName = data.category;
+    delete data.category;
+
+    if (categoryName) {
+      await this.prisma.category
+        .findUnique({
+          select: { id: true },
+          where: { name: data.category },
+        })
+        .then((data) => (categoryId = data.id));
+    }
+
+    let product: Omit<CreateProductDTO, 'category'> & { categoryId?: string } =
+      categoryName ? { ...data, categoryId } : data;
+    return this.prisma.product.create({ data: product });
   }
   async findAll() {
     return this.prisma.product.findMany();
@@ -22,9 +37,25 @@ export class ProductService {
     });
   }
   async update(id: ProductId, data: UpdateProductDTO) {
+    let categoryId: string = undefined;
+    let categoryName = data.category;
+    delete data.category;
+
+    if (categoryName) {
+      await this.prisma.category
+        .findUnique({
+          select: { id: true },
+          where: { name: data.category },
+        })
+        .then((data) => (categoryId = data.id));
+    }
+
+    let product: Omit<UpdateProductDTO, 'category'> & { categoryId?: string } =
+      categoryName ? { ...data, categoryId } : data;
+
     return this.prisma.product.update({
       where: { id: id as unknown as string },
-      data,
+      data: product,
     });
   }
   async remove(id: ProductId) {

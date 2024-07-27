@@ -13,71 +13,82 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ProductStatus {
+  ACTIVE
+  ARCHIVED
+  DRAFT
+  INACTIVE
+}
+
 model Product {
-  id    String     @id @default(uuid())
-  name         String     @unique
-  description  String?
-  price        Float
-  stock        Int        @default(0)
-  category     Category?  @relation(fields: [categoryId], references: [id])
-  categoryId   String?
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  tags         ProductTag[]
-  attributes   ProductAttribute[]
-  images       Image[]
+  id             String             @id @default(uuid())
+  name           String             @unique
+  description    String?
+  price          Float
+  stock          Int                @default(0)
+  category       Category?          @relation(fields: [categoryId], references: [id])
+  categoryId     String?
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  tags           ProductTag[]
+  attributes     ProductAttribute[]
+  images         Image[]
+  status         ProductStatus     @default(DRAFT)
+  seoTitle       String?
+  seoDescription String?
 }
 
 model Category {
-  id           String     @id @default(uuid())
-  name         String     @unique
-  parent       Category?  @relation("CategoryToCategory", fields: [parentId], references: [id])
-  parentId     String?
+  id            String     @id @default(uuid())
+  name          String     @unique
+  parent        Category?  @relation("CategoryToCategory", fields: [parentId], references: [id])
+  parentId      String?
   subCategories Category[] @relation("CategoryToCategory")
-  products     Product[]
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  products      Product[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
 }
 
 model Tag {
-  id        String     @id @default(uuid())
-  name         String
-  products     ProductTag[]
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  id        String       @id @default(uuid())
+  name      String
+  products  ProductTag[]
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
 }
 
 model ProductTag {
-  productId    String
-  tagId        String
-  product      Product    @relation(fields: [productId], references: [id])
-  tag          Tag        @relation(fields: [tagId], references: [id])
+  productId String
+  tagId     String
+  product   Product @relation(fields: [productId], references: [id])
+  tag       Tag     @relation(fields: [tagId], references: [id])
+
   @@id([productId, tagId])
 }
 
 model Attribute {
-  id  String     @id @default(uuid())
-  name         String
-  products     ProductAttribute[]
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  id        String             @id @default(uuid())
+  name      String
+  products  ProductAttribute[]
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
 }
 
 model ProductAttribute {
-  productId    String
-  attributeId  String
-  value        String
-  product      Product    @relation(fields: [productId], references: [id])
-  attribute    Attribute  @relation(fields: [attributeId], references: [id])
+  productId   String
+  attributeId String
+  value       String
+  product     Product   @relation(fields: [productId], references: [id])
+  attribute   Attribute @relation(fields: [attributeId], references: [id])
+
   @@id([productId, attributeId])
 }
 
 model Image {
-  id      String     @id @default(uuid())
-  productId    String
-  url          String
-  product      Product    @relation(fields: [productId], references: [id])
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  id        String   @id @default(uuid())
+  productId String
+  url       String
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
-

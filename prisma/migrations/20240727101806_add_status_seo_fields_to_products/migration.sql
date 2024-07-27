@@ -1,0 +1,7 @@
+-- CreateEnum
+CREATE TYPE "PRODUCT_STATUS" AS ENUM ('ACTIVE', 'ARCHIVED', 'DRAFT', 'INACTIVE');
+
+-- AlterTable
+ALTER TABLE "Product" ADD COLUMN     "seoDescription" TEXT,
+ADD COLUMN     "seoTitle" TEXT,
+ADD COLUMN     "status" "PRODUCT_STATUS" NOT NULL DEFAULT 'DRAFT';
