@@ -29,18 +29,17 @@ In the document, we plan the API endpoints and define the appropriate responses
 
 - Check for unique name
 - Handle bad requests
-- - Unique name
-- - Incorrect Parent
-- - Bad request
+ - Unique name
+ - Incorrect Parent
+ - Bad request
 
 ### Update a Category
-
+- id needed in the params
 #### Request Body
 
 ```
 {
     "name": "Abc",
-    "id": "<uuid>", // either name or id compulsory for identification
     "parent": "Xyz" // parent update is optional
 }
 ```
