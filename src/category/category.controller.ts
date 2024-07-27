@@ -11,10 +11,11 @@ import { CategoryService } from './category.service';
 import { CreateCategoryDTO } from './dto/CreateCategoryDTO';
 import { Category } from '@prisma/client';
 import { UpdateCategoryDTO } from './dto/UpdateCategoryDTO';
+import { DeleteCategoryDTO } from './dto/DeleteCategoryDTO';
 
 @Controller('category')
 export class CategoryController {
-  constructor(private readonly categoryService: CategoryService) { }
+  constructor(private readonly categoryService: CategoryService) {}
 
   @Post()
   create(@Body() createCategoryDTO: CreateCategoryDTO) {
@@ -31,6 +32,11 @@ export class CategoryController {
     return this.categoryService.findOne(id);
   }
 
+  @Get(':id/subcategory')
+  findSubCategories(@Param('id') id: Pick<Category, 'id'>) {
+    return this.categoryService.findAllSubCategories(id);
+  }
+
   @Put(':id')
   update(
     @Param('id') id: Pick<Category, 'id'>,
@@ -40,7 +46,10 @@ export class CategoryController {
   }
 
   @Delete(':id')
-  delete(@Param('id') id: Pick<Category, 'id'>) {
-    return this.categoryService.remove(id);
+  delete(
+    @Param('id') id: Pick<Category, 'id'>,
+    @Body() data: DeleteCategoryDTO,
+  ) {
+    return this.categoryService.remove({ id, ...data });
   }
 }
