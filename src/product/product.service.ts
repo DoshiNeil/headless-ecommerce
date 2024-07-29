@@ -22,11 +22,16 @@ export class ProductService {
           where: { name: categoryName },
         })
         .then((data) => (categoryId = data.id));
+    } else {
+      return { message: 'Invalid category name' };
     }
 
     let product: Omit<CreateProductDTO, 'category'> & { categoryId?: string } =
       categoryName ? { ...data, categoryId } : data;
-    return this.prisma.product.create({ data: product });
+
+    const createdProduct = await this.prisma.product.create({ data: product });
+    delete createdProduct.categoryId;
+    return { ...createdProduct, category: categoryName };
   }
   async findAll() {
     return this.prisma.product.findMany();
