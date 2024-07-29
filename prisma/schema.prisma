@@ -33,7 +33,7 @@ model Product {
   tags           ProductTag[]
   attributes     ProductAttribute[]
   images         Image[]
-  status         ProductStatus     @default(DRAFT)
+  status         ProductStatus      @default(DRAFT)
   seoTitle       String?
   seoDescription String?
 }
@@ -66,12 +66,22 @@ model ProductTag {
   @@id([productId, tagId])
 }
 
+model Variant {
+  id          String    @id @default(uuid())
+  name        String
+  attribute   Attribute @relation(fields: [attributeId], references: [id])
+  attributeId String
+  createdAt   DateTime
+  updateAt    DateTime
+}
+
 model Attribute {
   id        String             @id @default(uuid())
   name      String
   products  ProductAttribute[]
   createdAt DateTime           @default(now())
   updatedAt DateTime           @updatedAt
+  Variant   Variant[]
 }
 
 model ProductAttribute {
