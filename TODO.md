@@ -10,5 +10,8 @@
 [x] Review each Category operation and add appropriate guard rails
 [x] Add status field to Product. Can we use a Enum to set allowed values ( Active, Draft, Inactive, Archived)
 [x] Add fields for meta data  - SEO title, SEO description 
+[ ] Create CRUD for product tags 
+[ ] Create CRUD for product attributes 
 [ ] Since this is a local project, checkout OSS like MinIO for object storage ( images, gifs, videos).
+[ ] Creat CRUD for images 
 
