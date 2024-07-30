@@ -14,5 +14,5 @@ export class CreateAttributeDTO {
   @IsArray()
   @ValidateNested()
   @Type(() => CreateVariantDTO)
-  variant: CreateVariantDTO[];
+  variants: CreateVariantDTO[];
 }

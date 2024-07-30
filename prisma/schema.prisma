@@ -71,8 +71,8 @@ model Variant {
   name        String
   attribute   Attribute @relation(fields: [attributeId], references: [id])
   attributeId String
-  createdAt   DateTime
-  updateAt    DateTime
+  createdAt   DateTime  @default(now())
+  updateAt    DateTime  @updatedAt
 }
 
 model Attribute {
@@ -81,7 +81,7 @@ model Attribute {
   products  ProductAttribute[]
   createdAt DateTime           @default(now())
   updatedAt DateTime           @updatedAt
-  Variant   Variant[]
+  variants  Variant[]
 }
 
 model ProductAttribute {
