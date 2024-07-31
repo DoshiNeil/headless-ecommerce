@@ -3,16 +3,42 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { CategoryController } from './category/category.controller';
-import { CategoryService } from './category/category.service';
 import { CategoryModule } from './category/category.module';
 import { TagModule } from './tag/tag.module';
-import { AttributeService } from './attribute/attribute.service';
 import { AttributeModule } from './attribute/attribute.module';
+import { VariantModule } from './variant/variant.module';
+import { RouterModule } from '@nestjs/core';
 
 @Module({
-  imports: [PrismaModule,ProductModule, CategoryModule, TagModule, AttributeModule],
-  controllers: [AppController, CategoryController],
-  providers: [AppService, CategoryService, AttributeService],
+  imports: [
+    PrismaModule,
+    ProductModule,
+    CategoryModule,
+    TagModule,
+    AttributeModule,
+    VariantModule,
+    RouterModule.register([
+      {
+        path: 'product',
+        module: ProductModule,
+      },
+      {
+        path: 'category',
+        module: CategoryModule,
+      },
+      {
+        path: 'attribute',
+        module: AttributeModule,
+        children: [
+          {
+            path: 'variant',
+            module: VariantModule,
+          },
+        ],
+      },
+    ]),
+  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

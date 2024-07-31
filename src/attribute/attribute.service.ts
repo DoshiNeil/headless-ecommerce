@@ -3,16 +3,17 @@ import { Attribute } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UpdateAttributeDTO } from './DTO/UpdateAttributeDTO';
 import { CreateAttributeDTO } from './DTO/CreateAttributeDTO';
+import { CreateVariantDto } from 'src/variant/dto/createVariant.dto';
+import { VariantService } from 'src/variant/variant.service';
 
 @Injectable()
 export class AttributeService {
-  constructor(private prisma: PrismaService) {}
-
+  constructor(private prisma: PrismaService, private variantService: VariantService) { }
   async create(data: CreateAttributeDTO) {
-    const { name, variants }  = data;
+    const { name, variants } = data;
     return this.prisma.attribute.create({
       data: {
-         name,
+        name,
         variants: {
           create: variants,
         },
@@ -22,18 +23,9 @@ export class AttributeService {
   }
 
   async update(id: Pick<Attribute, 'id'>, data: UpdateAttributeDTO) {
-    const { name, variants } = data;
     return this.prisma.attribute.update({
       where: { id: id as unknown as string },
-      data: {
-        name,
-        variants: {
-          updateMany: variants?.map((v) => ({
-            where: { id: v.id },
-            data: v,
-          })),
-        },
-      },
+      data,
     });
   }
 
@@ -53,5 +45,9 @@ export class AttributeService {
       where: { id: id as unknown as string },
       include: { variants: true },
     });
+  }
+
+  async createVariant(id: Pick<Attribute, 'id'>, data: CreateVariantDto){
+      return this.variantService.create(id, data);
   }
 }
