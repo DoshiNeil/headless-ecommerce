@@ -14,4 +14,6 @@
 [-] Create CRUD for product attributes , with and without variants 
 [ ] Since this is a local project, checkout OSS like MinIO for object storage ( images, gifs, videos).
 [ ] Creat CRUD for images 
-
+[ ] Create CRUD for tags
+[ ] Figure out testing and start writing unit and integrated tests.
+[ ] Implement API design and documentation with Swagger
