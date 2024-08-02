@@ -13,7 +13,7 @@ import { Attribute } from '@prisma/client';
 import { UpdateAttributeDTO } from './DTO/UpdateAttributeDTO';
 import { CreateVariantDto } from 'src/variant/dto/createVariant.dto';
 
-@Controller('attribute')
+@Controller()
 export class AttributeController {
   constructor(private readonly attributeService: AttributeService) { }
 

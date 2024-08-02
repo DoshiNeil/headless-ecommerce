@@ -11,7 +11,7 @@ import { Variant } from '@prisma/client';
 import { UpdateVariantDto } from './dto/updateVariant.dto';
 
 
-@Controller('variant')
+@Controller()
 export class VariantController {
   constructor(private readonly variantService: VariantService) {}
 

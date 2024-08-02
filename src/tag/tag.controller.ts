@@ -4,7 +4,7 @@ import { CreateTagDTO } from './dto/CreateTagDTO';
 import { Tag } from '@prisma/client';
 import { UpdateTagDTO } from './dto/UpdateTagDTO';
 
-@Controller('tag')
+@Controller()
 export class TagController {
   constructor(private readonly tagService: TagService) {}
 

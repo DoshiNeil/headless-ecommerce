@@ -17,6 +17,7 @@ import { RouterModule } from '@nestjs/core';
     TagModule,
     AttributeModule,
     VariantModule,
+   // need to better handle the routes as they start becoming bigger 
     RouterModule.register([
       {
         path: 'product',

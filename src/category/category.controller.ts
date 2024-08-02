@@ -13,7 +13,7 @@ import { Category } from '@prisma/client';
 import { UpdateCategoryDTO } from './dto/UpdateCategoryDTO';
 import { DeleteCategoryDTO } from './dto/DeleteCategoryDTO';
 
-@Controller('category')
+@Controller()
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
