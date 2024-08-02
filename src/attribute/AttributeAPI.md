@@ -1,9 +1,11 @@
-# API to handle Attributes 
-Defining API for Attributes 
+# API to handle Attributes
 
-Attributes consist of changes its Name and it Variants 
+Defining API for Attributes
 
-A attribute is 
+Attributes consist of changes its Name and it Variants
+
+A attribute is
+
 ```
 {
     id:sting,
@@ -11,7 +13,9 @@ A attribute is
     variants: Variants[]
 }
 ```
-and a Variant is 
+
+and a Variant is
+
 ```
 {
     name: string,
@@ -21,14 +25,14 @@ and a Variant is
 
 To handle the Attributes we have the following endpoints
 
-|Status | Endpoint           | Description                                       |
-|-------|--------------------|---------------------------------------------------|
-| check | `GET` `/attribute` | this will get all the attribute with its variants |
-| check | `GET` `/attribute/:id`| this will get the attribute by id with its variants |
-| check | `POST` `/attribute`| this will create a new attribute. Here we can pass the variants too|
-| check | `PUT` `/attribute/:id`| this will update the attribute at the id.On the attribute details will be updated and not the Variant details for the Attribute|
-| check | `GET` `/attribute/variant/:id` | this will fetch the variant details | 
-| check | `POST` `/attribute/:aid/variant`| this will create a new variant.It can create 1 or many|
-| check | `PUT` `/attribute/variant/:vid`| this will update the variant details|
-| check | `DELETE` `/attribute/variant/:vid`| this will delete the variant details|
-| check | `DELETE` `/attribute/:aid`| this will delete the attribute along with its variants|
+| Status | Endpoint                           | Description                                                                                                                     |
+| ------ | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| check  | `GET` `/attribute`                 | this will get all the attribute with its variants                                                                               |
+| check  | `GET` `/attribute/:id`             | this will get the attribute by id with its variants                                                                             |
+| check  | `POST` `/attribute`                | this will create a new attribute. Here we can pass the variants too                                                             |
+| check  | `PUT` `/attribute/:id`             | this will update the attribute at the id.On the attribute details will be updated and not the Variant details for the Attribute |
+| check  | `GET` `/attribute/variant/:id`     | this will fetch the variant details                                                                                             |
+| check  | `POST` `/attribute/:aid/variant`   | this will create a new variant.It can create 1 or many                                                                          |
+| check  | `PUT` `/attribute/variant/:vid`    | this will update the variant details                                                                                            |
+| check  | `DELETE` `/attribute/variant/:vid` | this will delete the variant details                                                                                            |
+| check  | `DELETE` `/attribute/:aid`         | this will delete the attribute along with its variants                                                                          |
