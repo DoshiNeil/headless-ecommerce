@@ -11,9 +11,8 @@
 [x] Add status field to Product. Can we use a Enum to set allowed values ( Active, Draft, Inactive, Archived)
 [x] Add fields for meta data  - SEO title, SEO description 
 [x] Create CRUD for product tags 
-[-] Create CRUD for product attributes , with and without variants 
-[ ] Since this is a local project, checkout OSS like MinIO for object storage ( images, gifs, videos).
-[ ] Creat CRUD for images 
-[ ] Create CRUD for tags
+[x] Create CRUD for product attributes with and without variants 
+[x] Since this is a local project, checkout OSS like MinIO for object storage ( images, gifs, videos).
+[-] Creat CRUD for images 
 [ ] Figure out testing and start writing unit and integrated tests.
 [ ] Implement API design and documentation with Swagger

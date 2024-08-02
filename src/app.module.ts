@@ -24,6 +24,10 @@ import { RouterModule } from '@nestjs/core';
         module: ProductModule,
       },
       {
+        path: 'tag',
+        module: TagModule,
+      },
+      {
         path: 'category',
         module: CategoryModule,
       },
