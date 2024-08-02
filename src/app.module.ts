@@ -8,6 +8,7 @@ import { TagModule } from './tag/tag.module';
 import { AttributeModule } from './attribute/attribute.module';
 import { VariantModule } from './variant/variant.module';
 import { RouterModule } from '@nestjs/core';
+import { ImageModule } from './image/image.module';
 
 @Module({
   imports: [
@@ -17,11 +18,18 @@ import { RouterModule } from '@nestjs/core';
     TagModule,
     AttributeModule,
     VariantModule,
-   // need to better handle the routes as they start becoming bigger 
+    ImageModule,
+    // need to better handle the routes as they start becoming bigger
     RouterModule.register([
       {
         path: 'product',
         module: ProductModule,
+        children: [
+          {
+            path: 'image',
+            module: ImageModule,
+          },
+        ],
       },
       {
         path: 'tag',
