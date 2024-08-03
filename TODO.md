@@ -13,7 +13,7 @@
 [x] Create CRUD for product tags 
 [x] Create CRUD for product attributes with and without variants 
 [x] Since this is a local project, checkout OSS like MinIO for object storage ( images, gifs, videos).
-[-] Creat CRUD for images 
+[-] Creat CRUD for images ( need to figure out nested routes, current code doesnt work ) 
 [ ] Figure out testing and start writing unit and integrated tests.
 [ ] Implement API design and documentation with Swagger
 [ ] Implement logger middleware. ( this needs to tie up with a telemetery system which you may get to later)

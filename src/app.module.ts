@@ -9,10 +9,14 @@ import { AttributeModule } from './attribute/attribute.module';
 import { VariantModule } from './variant/variant.module';
 import { RouterModule } from '@nestjs/core';
 import { ImageModule } from './image/image.module';
+import { MinioModule } from './minio/minio.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
     PrismaModule,
+    MinioModule,
+    ConfigModule.forRoot({ isGlobal: true }),
     ProductModule,
     CategoryModule,
     TagModule,
@@ -25,6 +29,10 @@ import { ImageModule } from './image/image.module';
         path: 'product',
         module: ProductModule,
         children: [
+          {
+            path: ':productId/image',
+            module: ImageModule,
+          },
           {
             path: 'image',
             module: ImageModule,
@@ -54,4 +62,4 @@ import { ImageModule } from './image/image.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

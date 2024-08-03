@@ -4,7 +4,7 @@ Defining API for Images
 
 Images consist of changes its Name and it Variants
 
-A image is
+An image is
 
 ```
 {

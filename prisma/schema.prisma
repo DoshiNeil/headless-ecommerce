@@ -97,7 +97,8 @@ model ProductAttribute {
 model Image {
   id        String   @id @default(uuid())
   productId String
-  url       String
+  imageName String
+  uploadUrl String
   product   Product  @relation(fields: [productId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

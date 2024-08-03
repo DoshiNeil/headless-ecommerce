@@ -16,14 +16,13 @@ export class ProductService {
     delete data.category;
 
     if (categoryName) {
+      // FIXME: need a fallback case if the category name is incorrect / doesn't exist
       await this.prisma.category
         .findUnique({
           select: { id: true },
           where: { name: categoryName },
         })
         .then((data) => (categoryId = data.id));
-    } else {
-      return { message: 'Invalid category name' };
     }
 
     let product: Omit<CreateProductDTO, 'category'> & { categoryId?: string } =
