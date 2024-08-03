@@ -1,4 +1,4 @@
-# A TODO for the ecom api package 
+# Things to do for first draft of the application API 
 [x] Setup Nestjs and dockerize the applications 
 [x] Setup postgresQL service. 
 [x] Update the docker-compose for development too, ref: https://www.tomray.dev/nestjs-docker-compose-postgres
@@ -16,3 +16,8 @@
 [-] Creat CRUD for images 
 [ ] Figure out testing and start writing unit and integrated tests.
 [ ] Implement API design and documentation with Swagger
+[ ] Implement logger middleware. ( this needs to tie up with a telemetery system which you may get to later)
+[ ] Sketch out User Management module. Implement following features (here we implement gaurd for authentication)  
+- [ ] Register new user 
+- [ ] Login new user 
+- [ ] Authentication on the requests 
