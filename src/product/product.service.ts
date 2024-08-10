@@ -35,7 +35,7 @@ export class ProductService {
   async findAll() {
     return this.prisma.product.findMany();
   }
-  async findOne(id: ProductId) {
+  async findOne(id: string) {
     return this.prisma.product.findUnique({
       where: { id: id as unknown as string },
     });
